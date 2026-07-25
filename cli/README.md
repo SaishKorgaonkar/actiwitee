@@ -128,6 +128,21 @@ This installs:
 Logs: `/tmp/actiwitee-agent.log`, `/tmp/actiwitee-publish.log`  
 Remove: `bash scripts/install-cron.sh --uninstall`
 
+### Windows (Task Scheduler)
+
+From `cli/` after `npm run build`:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/install-tasks.ps1
+```
+
+Uses `scripts/actiwitee-agent.cmd` (every 5 min) and `scripts/actiwitee-publish.cmd` (hourly).
+Set `ACTIWITEE_R2_BUCKET` and `ACTIWITEE_R2_KEY` in Windows environment variables before the hourly task runs.
+
+Remove: `powershell -ExecutionPolicy Bypass -File scripts/install-tasks.ps1 -Uninstall`
+
+On Windows, prefer **session-log** agent signals in config; app-focus and process detection are macOS/Linux only.
+
 ```bash
 node dist/cli.js show > activity.json   # static artifact for CDN hosting
 ```

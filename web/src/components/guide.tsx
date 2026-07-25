@@ -70,7 +70,9 @@ ACTIWITEE_GITHUB_WORK_TOKEN=ghp_...`,
   signals:
     - { id: cursor, type: app-focus, match: "Cursor", category: editor }
     - { id: claude-code, type: session-log, path: "~/.claude/projects", category: ai-cli }
-    - { id: ollama, type: process, match: "ollama|llama-server", category: local-model }`,
+    - { id: ollama, type: process, match: "ollama|llama-server", category: local-model }
+
+# Windows: use session-log only, e.g. claude-code above`,
       },
       {
         title: 'terminal',
@@ -78,7 +80,7 @@ ACTIWITEE_GITHUB_WORK_TOKEN=ghp_...`,
 node dist/cli.js agent --once   # single sample`,
       },
     ],
-    note: 'Best on your Mac: app-focus detects Cursor and VS Code when frontmost. Linux supports process and session-log signals. Windows can collect remote sources and deploy the API; local IDE tracking and the cron installer are not supported yet.',
+    note: 'Best on your Mac: app-focus detects Cursor and VS Code when frontmost. Linux supports process and session-log signals. On Windows, use session-log signals only (e.g. Claude Code project folders); skip app-focus and process entries.',
   },
   {
     id: 'deploy',
@@ -127,7 +129,7 @@ const { contributions } = await res.json()
     id: 'automate',
     step: '06',
     title: 'Automate collection & publish',
-    body: 'Install cron jobs with one script. Agent runs every 5 minutes; collect + R2 upload runs hourly. Your Mac must be awake for jobs to fire.',
+    body: 'Install cron on macOS/Linux with one script, or Task Scheduler on Windows. Agent every 5 minutes; collect + R2 upload hourly. Your machine must be awake for jobs to fire.',
     blocks: [
       {
         title: 'install cron (macOS / Linux)',
@@ -140,22 +142,39 @@ bash scripts/install-cron.sh
 crontab -l | grep actiwitee`,
       },
       {
+        title: 'install tasks (Windows)',
+        code: `# PowerShell (Admin not required)
+cd cli
+powershell -ExecutionPolicy Bypass -File scripts/install-tasks.ps1
+
+# or create tasks manually in Task Scheduler:
+#   every 5 min  -> scripts\\actiwitee-agent.cmd
+#   every hour   -> scripts\\actiwitee-publish.cmd
+
+# optional env vars (System Properties > Environment):
+#   ACTIWITEE_R2_BUCKET=your-bucket
+#   ACTIWITEE_R2_KEY=actiwitee/activity.json
+
+# remove
+powershell -ExecutionPolicy Bypass -File scripts/install-tasks.ps1 -Uninstall`,
+      },
+      {
         title: 'what gets installed',
-        code: `# every 5 min: local heartbeats
-scripts/actiwitee-agent.sh
+        code: `# every 5 min: local heartbeats (Mac/Linux/Windows)
+scripts/actiwitee-agent.sh   # or actiwitee-agent.cmd
 
 # every hour: collect, merge, upload to R2
-scripts/actiwitee-publish.sh
+scripts/actiwitee-publish.sh # or actiwitee-publish.cmd
 
-# logs
+# Mac/Linux logs
 /tmp/actiwitee-agent.log
 /tmp/actiwitee-publish.log
 
-# remove
+# Mac/Linux remove
 bash scripts/install-cron.sh --uninstall`,
       },
     ],
-    note: 'macOS and Linux only for install-cron.sh. On Windows, use Task Scheduler with the same node dist/cli.js commands. Your Mac must be awake for cron jobs to run.',
+    note: 'Windows: use session-log agent signals only (no IDE focus tracking). Remote GitHub/CP collect and Worker deploy work the same as on Mac.',
   },
 ]
 
@@ -174,9 +193,9 @@ export function Guide() {
           <p className="mt-4 rounded-xl border border-hairline bg-surface-card px-4 py-3 text-sm leading-relaxed text-body">
             <span className="font-medium text-ink">Runs everywhere.</span> GitHub, competitive
             programming, and the read-only API work on macOS, Linux, and Windows.{' '}
-            <span className="font-medium text-ink">Local session tracking and cron automation</span>{' '}
-            are built for your Mac (Linux works too). Windows users can still collect remote activity
-            and publish to Cloudflare.
+            <span className="font-medium text-ink">Local session tracking and automation</span>{' '}
+            are best on your Mac (Linux works too). Windows users get remote collect, Worker deploy,
+            and Task Scheduler scripts in step 6. See step 3 for Windows agent config.
           </p>
         </div>
 
