@@ -14,8 +14,8 @@ cd actiwitee
 npm install
 npm run build
 cd cli
-actiwitee collect --demo
-actiwitee serve   # http://localhost:4787`,
+node dist/cli.js collect --demo
+node dist/cli.js serve   # http://localhost:4787`,
       },
       {
         title: 'verify',
@@ -32,7 +32,7 @@ curl localhost:4787/activity | head`,
     blocks: [
       {
         title: 'terminal',
-        code: `actiwitee init
+        code: `node dist/cli.js init
 # edits config.yaml + .env`,
       },
       {
@@ -74,8 +74,8 @@ ACTIWITEE_GITHUB_WORK_TOKEN=ghp_...`,
       },
       {
         title: 'terminal',
-        code: `actiwitee agent          # continuous
-actiwitee agent --once   # single sample`,
+        code: `node dist/cli.js agent          # continuous
+node dist/cli.js agent --once   # single sample`,
       },
     ],
     note: 'macOS only for app-focus signals. Add a signal for every tool you use: Cursor, VS Code, Claude Code, Hermes, terminals, local models, etc.',
@@ -88,8 +88,8 @@ actiwitee agent --once   # single sample`,
     blocks: [
       {
         title: 'publish locally',
-        code: `actiwitee collect
-actiwitee show > data/activity.json
+        code: `node dist/cli.js collect
+node dist/cli.js show > data/activity.json
 # upload to R2 (see cli/deploy/worker/README.md)`,
       },
       {
@@ -132,10 +132,10 @@ const { contributions } = await res.json()
       {
         title: 'typical schedule',
         code: `# every 5 min: local heartbeats
-actiwitee agent --once
+node dist/cli.js agent --once
 
 # every hour: refresh remote sources + upload
-actiwitee collect && actiwitee show > data/activity.json
+node dist/cli.js collect && node dist/cli.js show > data/activity.json
 # then upload to R2`,
       },
     ],

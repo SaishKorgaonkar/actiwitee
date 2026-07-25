@@ -13,9 +13,10 @@ export function findConfigPath(cwd = process.cwd()): string | null {
   return null
 }
 
-export function loadConfig(explicitPath?: string): Config {
+export function loadConfig(explicitPath?: string, opts?: { defaultsIfMissing?: boolean }): Config {
   const p = explicitPath ?? findConfigPath()
   if (!p || !fs.existsSync(p)) {
+    if (opts?.defaultsIfMissing) return configSchema.parse({})
     throw new Error(
       'No config found. Run `actiwitee init` to create config.yaml, then edit it.'
     )

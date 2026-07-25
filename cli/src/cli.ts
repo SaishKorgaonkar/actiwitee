@@ -43,7 +43,7 @@ program
   .option('--demo', 'use synthetic demo data (no tokens/network)')
   .option('-c, --config <path>', 'path to config.yaml')
   .action(async (opts) => {
-    const config = loadConfig(opts.config)
+    const config = loadConfig(opts.config, { defaultsIfMissing: opts.demo })
     const store = new Store()
     await runCollect(config, store, { demo: opts.demo })
   })
@@ -53,7 +53,7 @@ program
   .description('Start the read-only HTTP API')
   .option('-c, --config <path>', 'path to config.yaml')
   .action(async (opts) => {
-    const config = loadConfig(opts.config)
+    const config = loadConfig(opts.config, { defaultsIfMissing: true })
     const store = new Store()
     await serve(config, store)
   })
