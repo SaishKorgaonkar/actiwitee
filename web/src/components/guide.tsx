@@ -78,7 +78,7 @@ ACTIWITEE_GITHUB_WORK_TOKEN=ghp_...`,
 node dist/cli.js agent --once   # single sample`,
       },
     ],
-    note: 'macOS only for app-focus signals. Add a signal for every tool you use: Cursor, VS Code, Claude Code, Hermes, terminals, local models, etc.',
+    note: 'Best on your Mac: app-focus detects Cursor and VS Code when frontmost. Linux supports process and session-log signals. Windows can collect remote sources and deploy the API; local IDE tracking and the cron installer are not supported yet.',
   },
   {
     id: 'deploy',
@@ -141,10 +141,10 @@ crontab -l | grep actiwitee`,
       },
       {
         title: 'what gets installed',
-        code: `# every 5 min — local heartbeats
+        code: `# every 5 min: local heartbeats
 scripts/actiwitee-agent.sh
 
-# every hour — collect, merge, upload to R2
+# every hour: collect, merge, upload to R2
 scripts/actiwitee-publish.sh
 
 # logs
@@ -155,7 +155,7 @@ scripts/actiwitee-publish.sh
 bash scripts/install-cron.sh --uninstall`,
       },
     ],
-    note: 'Requires npm run build first. Uses wrangler for R2 upload after Worker deploy (step 4). launchd or Hermes work too if you prefer those over cron.',
+    note: 'macOS and Linux only for install-cron.sh. On Windows, use Task Scheduler with the same node dist/cli.js commands. Your Mac must be awake for cron jobs to run.',
   },
 ]
 
@@ -170,6 +170,13 @@ export function Guide() {
           <p className="mt-4 text-base leading-relaxed text-body">
             From zero to a live portfolio heatmap. Copy the commands, edit config.yaml for your
             handles, deploy the Worker, and point your site at the API.
+          </p>
+          <p className="mt-4 rounded-xl border border-hairline bg-surface-card px-4 py-3 text-sm leading-relaxed text-body">
+            <span className="font-medium text-ink">Runs everywhere.</span> GitHub, competitive
+            programming, and the read-only API work on macOS, Linux, and Windows.{' '}
+            <span className="font-medium text-ink">Local session tracking and cron automation</span>{' '}
+            are built for your Mac (Linux works too). Windows users can still collect remote activity
+            and publish to Cloudflare.
           </p>
         </div>
 
