@@ -14,7 +14,9 @@
     "collect": "tsx src/cli.ts collect",
     "serve": "tsx src/cli.ts serve",
     "agent": "tsx src/cli.ts agent",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "cron:install": "bash scripts/install-cron.sh",
+    "cron:uninstall": "bash scripts/install-cron.sh --uninstall"
   },
   "keywords": [
     "contributions",

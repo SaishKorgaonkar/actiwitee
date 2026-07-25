@@ -127,19 +127,35 @@ const { contributions } = await res.json()
     id: 'automate',
     step: '06',
     title: 'Automate collection & publish',
-    body: 'Run the agent on an interval and collect + publish on a schedule. cron, launchd, or Hermes all work.',
+    body: 'Install cron jobs with one script. Agent runs every 5 minutes; collect + R2 upload runs hourly. Your Mac must be awake for jobs to fire.',
     blocks: [
       {
-        title: 'typical schedule',
-        code: `# every 5 min: local heartbeats
-node dist/cli.js agent --once
+        title: 'install cron (macOS / Linux)',
+        code: `cd cli
+# optional: set R2 target before install
+export ACTIWITEE_R2_BUCKET=your-bucket
+export ACTIWITEE_R2_KEY=actiwitee/activity.json
 
-# every hour: refresh remote sources + upload
-node dist/cli.js collect && node dist/cli.js show > data/activity.json
-# then upload to R2`,
+bash scripts/install-cron.sh
+crontab -l | grep actiwitee`,
+      },
+      {
+        title: 'what gets installed',
+        code: `# every 5 min — local heartbeats
+scripts/actiwitee-agent.sh
+
+# every hour — collect, merge, upload to R2
+scripts/actiwitee-publish.sh
+
+# logs
+/tmp/actiwitee-agent.log
+/tmp/actiwitee-publish.log
+
+# remove
+bash scripts/install-cron.sh --uninstall`,
       },
     ],
-    note: 'See cli/README.md for the full reference. Everything is config-driven. Remove sources you don\'t use.',
+    note: 'Requires npm run build first. Uses wrangler for R2 upload after Worker deploy (step 4). launchd or Hermes work too if you prefer those over cron.',
   },
 ]
 

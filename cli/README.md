@@ -108,9 +108,25 @@ Two long-running pieces:
 2. `actiwitee collect` — refresh remote sources periodically (cron/systemd/Hermes cron).
 3. `actiwitee serve`   — the API your frontend reads.
 
-A typical loop: `agent` runs continuously; a scheduled `collect` runs hourly;
-`serve` stays up (or is replaced by publishing the `show` output as a static
-JSON artifact behind a CDN).
+A typical loop: `agent` runs every 5 minutes; `collect` + publish runs hourly.
+`serve` is optional for local dev — production uses R2 + the Cloudflare Worker.
+
+### Cron automation
+
+From `cli/` after `npm run build`:
+
+```bash
+export ACTIWITEE_R2_BUCKET=your-bucket
+export ACTIWITEE_R2_KEY=actiwitee/activity.json
+bash scripts/install-cron.sh
+```
+
+This installs:
+- `scripts/actiwitee-agent.sh` every 5 min (local heartbeats)
+- `scripts/actiwitee-publish.sh` every hour (collect + merge + R2 upload)
+
+Logs: `/tmp/actiwitee-agent.log`, `/tmp/actiwitee-publish.log`  
+Remove: `bash scripts/install-cron.sh --uninstall`
 
 ```bash
 node dist/cli.js show > activity.json   # static artifact for CDN hosting

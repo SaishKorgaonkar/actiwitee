@@ -71,6 +71,12 @@ Hermes cron scripts (update paths if you moved the repo):
 - `~/.hermes/scripts/actiwitee-agent.sh` — agent heartbeat every 5m
 - `~/.hermes/scripts/actiwitee-publish.sh` — collect + R2 upload every 60m
 
+Or use the built-in installer from `cli/`:
+
+```bash
+bash scripts/install-cron.sh
+```
+
 See [`cli/README.md`](cli/README.md) for full configuration docs.
 
 ## License
