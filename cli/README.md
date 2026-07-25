@@ -54,10 +54,10 @@ sources:
   github:
     - id: personal
       username: your-personal-handle
-      tokenEnv: CODEPULSE_GITHUB_PERSONAL_TOKEN
+      tokenEnv: ACTIWITEE_GITHUB_PERSONAL_TOKEN
     - id: work
       username: your-work-handle
-      tokenEnv: CODEPULSE_GITHUB_WORK_TOKEN
+      tokenEnv: ACTIWITEE_GITHUB_WORK_TOKEN
 ```
 
 Without a token a GitHub source falls back to public-only counts.
@@ -130,7 +130,8 @@ The existing `github-contributions-client.tsx` renders `{date,count,level}[]`.
 Point it at the hosted codepulse Worker API:
 
 ```
-NEXT_PUBLIC_CODEPULSE_API_URL=https://codepulse.saish.xyz
+NEXT_PUBLIC_ACTIWITEE_API_URL=https://codepulse.saish.xyz
+# legacy alias still supported: NEXT_PUBLIC_CODEPULSE_API_URL
 # fetch(`${API_URL}/contributions?year=${year}`)  ->  json.contributions
 ```
 

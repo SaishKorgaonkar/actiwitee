@@ -47,19 +47,24 @@ const panes = [
 export function TerminalMockup() {
   return (
     <div className="relative mx-auto w-full max-w-4xl">
-      <div className="spotlight-glow pointer-events-none absolute inset-0 -top-24" aria-hidden />
-      <div className="relative rounded-xl bg-canvas-deep p-6 sm:p-8">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className="relative overflow-hidden rounded-2xl bg-terminal p-1 shadow-sm ring-1 ring-terminal-border sm:p-1.5">
+        <div className="flex items-center gap-1.5 border-b border-terminal-border px-4 py-3">
+          <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" aria-hidden />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" aria-hidden />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" aria-hidden />
+        </div>
+
+        <div className="grid grid-cols-1 gap-3 p-4 sm:grid-cols-2 sm:p-5">
           {panes.map((pane) => (
             <div
               key={pane.title}
-              className="rounded-lg bg-surface-card p-5 font-mono text-[13px] leading-relaxed"
+              className="rounded-lg bg-terminal-pane p-4 font-mono text-[13px] leading-relaxed ring-1 ring-terminal-border"
             >
-              <p className="mb-3 text-[11px] font-semibold uppercase tracking-wider text-muted">
+              <p className="mb-3 text-[11px] font-medium uppercase tracking-wider text-terminal-muted">
                 {pane.title}
               </p>
               {pane.lines.map((line, i) => (
-                <p key={i} className={line ? 'text-body' : 'h-4'}>
+                <p key={i} className={line ? 'text-terminal-text' : 'h-4'}>
                   {line}
                 </p>
               ))}

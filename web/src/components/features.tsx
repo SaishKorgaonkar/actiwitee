@@ -17,12 +17,12 @@ const features = [
   {
     title: 'Config-driven',
     description:
-      'One YAML file for sources, weights, CORS, and agent signals. No database — just JSON on disk.',
+      'One YAML file for sources, weights, CORS, and agent signals. No database, just JSON on disk.',
   },
   {
     title: 'Full history',
     description:
-      'GitHub history back to account creation. Scrollable graph with rich per-day tooltips — contributions, local time, and source breakdown.',
+      'GitHub history back to account creation. Scrollable graph with rich per-day tooltips: contributions, local time, and source breakdown.',
   },
   {
     title: 'Automate with cron',
@@ -40,7 +40,7 @@ export function Features() {
             Built for developers who code everywhere
           </h2>
           <p className="mt-4 text-base leading-relaxed text-body">
-            Actiwitee is the self-hostable backend behind unified coding activity — from open source
+            Actiwitee is the self-hostable backend behind unified coding activity, from open source
             commits to contest submissions to late-night AI pair sessions.
           </p>
         </div>

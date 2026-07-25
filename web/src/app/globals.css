@@ -16,8 +16,8 @@
   .spotlight-glow {
     background: radial-gradient(
       ellipse 70% 50% at 50% 40%,
-      rgba(26, 38, 255, 0.35) 0%,
-      rgba(0, 7, 205, 0.12) 40%,
+      rgba(26, 38, 255, 0.12) 0%,
+      rgba(0, 7, 205, 0.06) 40%,
       transparent 70%
     );
   }
@@ -25,7 +25,7 @@
   .spotlight-glow-subtle {
     background: radial-gradient(
       ellipse 60% 40% at 50% 50%,
-      rgba(26, 38, 255, 0.2) 0%,
+      rgba(29, 29, 31, 0.04) 0%,
       transparent 65%
     );
   }

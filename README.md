@@ -62,6 +62,8 @@ npm run dev:web    # http://localhost:3000
 npm run build:web
 ```
 
+Deploy to Vercel with root directory `web`. The landing page includes a full self-hosting guide (install → configure → deploy → portfolio wiring).
+
 ## Automation
 
 Hermes cron scripts (update paths if you moved the repo):

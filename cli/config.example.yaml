@@ -16,11 +16,11 @@ sources:
   github:
     - id: personal
       username: your-personal-handle
-      tokenEnv: CODEPULSE_GITHUB_PERSONAL_TOKEN
+      tokenEnv: ACTIWITEE_GITHUB_PERSONAL_TOKEN
       includePrivate: true
     - id: work
       username: your-work-handle
-      tokenEnv: CODEPULSE_GITHUB_WORK_TOKEN
+      tokenEnv: ACTIWITEE_GITHUB_WORK_TOKEN
       includePrivate: true
 
   leetcode:

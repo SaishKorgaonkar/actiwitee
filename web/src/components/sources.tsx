@@ -17,7 +17,7 @@ export function Sources() {
               Plug in your sources
             </h2>
             <p className="mt-4 text-base leading-relaxed text-body">
-              Add handles and tokens in config.yaml. Run collect — Actiwitee normalizes dates,
+              Add handles and tokens in config.yaml. Run collect. Actiwitee normalizes dates,
               deduplicates, and merges into one timeline.
             </p>
           </div>
@@ -28,7 +28,7 @@ export function Sources() {
                 key={s.name}
                 className="flex items-start gap-3 rounded-lg bg-surface-card px-4 py-3"
               >
-                <span className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-primary-glow" />
+                <span className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-ink" />
                 <div>
                   <p className="text-sm font-medium text-ink">{s.name}</p>
                   <p className="text-xs text-muted">{s.detail}</p>
