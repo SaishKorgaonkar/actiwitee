@@ -1,0 +1,21 @@
+# Copy to wrangler.toml after `npx wrangler login`
+name = "codepulse-api"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# Optional: from Cloudflare dashboard → Account Home → R2
+# account_id = "your-account-id"
+
+[[r2_buckets]]
+binding = "ASSETS"
+bucket_name = "portfolio-images"
+
+[vars]
+ALLOWED_ORIGINS = "https://saish.xyz,https://www.saish.xyz,http://localhost:3000"
+
+# Custom domain — requires saish.xyz zone on Cloudflare.
+[[routes]]
+pattern = "codepulse.saish.xyz"
+custom_domain = true
+
+# Or use workers.dev: run deploy and answer YES to register a subdomain.

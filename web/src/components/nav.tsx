@@ -4,7 +4,7 @@ const links = [
   { href: '#product', label: 'Product' },
   { href: '#sources', label: 'Sources' },
   { href: '#docs', label: 'Docs' },
-  { href: 'https://github.com/SaishKorgaonkar/activity', label: 'GitHub', external: true },
+  { href: 'https://github.com/SaishKorgaonkar/actiwitee', label: 'GitHub', external: true },
 ]
 
 export function Nav() {
@@ -41,7 +41,7 @@ export function Nav() {
 
         <div className="flex items-center gap-3">
           <a
-            href="https://github.com/SaishKorgaonkar/activity"
+            href="https://github.com/SaishKorgaonkar/actiwitee"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden text-sm font-medium text-body sm:inline hover:text-ink"

@@ -25,7 +25,7 @@ export function Hero() {
             Get started
           </a>
           <a
-            href="https://github.com/SaishKorgaonkar/activity"
+            href="https://github.com/SaishKorgaonkar/actiwitee"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex h-10 items-center rounded-md bg-surface-card-elevated px-[18px] text-sm font-medium text-ink"

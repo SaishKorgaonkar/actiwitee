@@ -1,0 +1,83 @@
+# actiwitee config — copy to config.yaml and edit.
+# Secrets are NOT stored here; reference env vars via `tokenEnv`.
+
+server:
+  port: 4787
+  # Comma-separated origins allowed to call the API (your portfolio, localhost).
+  # Use "*" to allow all (fine for a public read-only activity endpoint).
+  cors: "*"
+
+# Number of days of history to aggregate/serve. Use 0 for full history.
+rangeDays: 0
+
+# ---- Data sources ------------------------------------------------------------
+# Every entry is optional. Remove what you don't use. Nothing is required.
+sources:
+  github:
+    - id: personal
+      username: your-personal-handle
+      tokenEnv: CODEPULSE_GITHUB_PERSONAL_TOKEN
+      includePrivate: true
+    - id: work
+      username: your-work-handle
+      tokenEnv: CODEPULSE_GITHUB_WORK_TOKEN
+      includePrivate: true
+
+  leetcode:
+    - username: your-leetcode-handle
+
+  codeforces:
+    - username: your-codeforces-handle
+
+  codechef:
+    - username: your-codechef-handle
+
+# ---- Scoring -----------------------------------------------------------------
+# Each source type contributes `weight * count` to a day's score.
+# `local` weight applies per 30 minutes of tracked session time.
+weights:
+  github: 1
+  leetcode: 3
+  codeforces: 3
+  codechef: 3
+  local: 1
+
+# How raw daily scores map to heatmap levels 0-4.
+# mode: "percentile" (adaptive, recommended) or "fixed"
+levels:
+  mode: percentile
+  # used only when mode: fixed
+  thresholds: [1, 4, 8, 12]
+
+# ---- Local AI-coding session tracker ----------------------------------------
+# The agent samples every `interval` seconds. If any signal is active, it logs a
+# heartbeat under that signal's category. Add a signal for every tool you use.
+agent:
+  interval: 180          # seconds between samples
+  minSessionGap: 900     # seconds of silence that ends a session
+  signals:
+    - id: ollama
+      type: process
+      match: "ollama|llama-server|llama\\.cpp|mlx_lm|lm-studio|LM Studio"
+      category: local-model
+
+    - id: cursor
+      type: app-focus
+      match: "Cursor"
+      category: editor
+
+    - id: vscode
+      type: app-focus
+      match: "Code|Visual Studio Code"
+      category: editor
+
+    - id: claude-code
+      type: session-log
+      path: "~/.claude/projects"
+      category: ai-cli
+
+    # Example: only count when you're focused in a terminal AND recently active.
+    - id: terminal
+      type: app-focus
+      match: "iTerm2|Terminal|Ghostty|Warp|Alacritty|kitty"
+      category: terminal

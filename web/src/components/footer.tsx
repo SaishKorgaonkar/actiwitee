@@ -8,7 +8,7 @@ export function Footer() {
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-body">
-          <a href="https://github.com/SaishKorgaonkar/activity" className="hover:text-ink">
+          <a href="https://github.com/SaishKorgaonkar/actiwitee" className="hover:text-ink">
             GitHub
           </a>
           <a href="https://codepulse.saish.xyz/health" className="hover:text-ink">

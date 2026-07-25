@@ -4,24 +4,46 @@
 
 Actiwitee merges GitHub, competitive programming platforms, and local AI-coding sessions into one contribution heatmap — with a read-only API built for portfolios.
 
-## What it does
+## Monorepo layout
 
-- **Collect** activity from GitHub, LeetCode, Codeforces, CodeChef, and more
-- **Track** local sessions via a lightweight agent (Cursor, VS Code, Claude Code, Hermes, terminal)
-- **Merge** everything into weighted, percentile-based heatmap levels
-- **Serve** a JSON API from Cloudflare Workers + R2
-- **Embed** on any site — see [saish.xyz](https://saish.xyz) for a live demo
+```
+actiwitee/
+  cli/          # TypeScript CLI — collectors, agent, local API
+  web/          # Next.js landing page
+  deploy/       # (inside cli/) Cloudflare Worker + R2 publish
+```
 
 ## Quick start
 
 ```bash
-git clone https://github.com/SaishKorgaonkar/activity.git
-cd activity
-cp config.example.yaml config.yaml   # add your handles & tokens
-npm install && npm run build
-actiwitee collect
-actiwitee serve
+git clone https://github.com/SaishKorgaonkar/actiwitee.git
+cd actiwitee
+npm install
+npm run build
+
+cd cli
+cp config.example.yaml config.yaml
+cp .env.example .env          # add tokens
+npm run collect -- --demo
+npm run serve                 # http://localhost:4787
 ```
+
+Or from the repo root:
+
+```bash
+npm run collect -- --demo
+npm run serve
+```
+
+## CLI commands
+
+| Command | Description |
+|---------|-------------|
+| `actiwitee init` | Scaffold `config.yaml` + `.env` |
+| `actiwitee collect` | Fetch all configured sources |
+| `actiwitee agent --once` | Sample local coding signals |
+| `actiwitee show` | Print merged activity JSON |
+| `actiwitee serve` | Start read-only HTTP API |
 
 ## API
 
@@ -33,12 +55,21 @@ When deployed, the read-only API exposes:
 
 Live example: [codepulse.saish.xyz](https://codepulse.saish.xyz)
 
-## Stack
+## Web
 
-- TypeScript CLI + collectors
-- JSON store (no database)
-- Cloudflare Worker + R2 for hosted API
-- Next.js landing page (this repo)
+```bash
+npm run dev:web    # http://localhost:3000
+npm run build:web
+```
+
+## Automation
+
+Hermes cron scripts (update paths if you moved the repo):
+
+- `~/.hermes/scripts/actiwitee-agent.sh` — agent heartbeat every 5m
+- `~/.hermes/scripts/actiwitee-publish.sh` — collect + R2 upload every 60m
+
+See [`cli/README.md`](cli/README.md) for full configuration docs.
 
 ## License
 

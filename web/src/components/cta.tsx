@@ -1,6 +1,6 @@
 const steps = [
   {
-    cmd: 'git clone https://github.com/SaishKorgaonkar/activity.git',
+    cmd: 'git clone https://github.com/SaishKorgaonkar/actiwitee.git',
     label: 'Clone the repo',
   },
   {
@@ -49,7 +49,7 @@ export function Cta() {
 
           <div className="mt-10 flex flex-wrap gap-4">
             <a
-              href="https://github.com/SaishKorgaonkar/activity"
+              href="https://github.com/SaishKorgaonkar/actiwitee"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-10 items-center rounded-md bg-primary px-[18px] text-sm font-medium text-ink"

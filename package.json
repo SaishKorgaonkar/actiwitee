@@ -1,26 +1,24 @@
 {
-  "name": "activity",
+  "name": "actiwitee",
   "version": "0.1.0",
   "private": true,
+  "description": "Actiwitee — unified coding activity, self-hosted (CLI + landing page)",
+  "workspaces": [
+    "cli",
+    "web"
+  ],
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "npm run build -w cli && npm run build -w web",
+    "build:cli": "npm run build -w cli",
+    "build:web": "npm run build -w web",
+    "dev:cli": "npm run dev -w cli",
+    "dev:web": "npm run dev -w web",
+    "collect": "npm run collect -w cli",
+    "serve": "npm run serve -w cli",
+    "agent": "npm run agent -w cli"
   },
-  "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.35"
+  "engines": {
+    "node": ">=20"
   },
-  "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.35"
-  }
+  "license": "MIT"
 }

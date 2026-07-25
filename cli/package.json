@@ -1,0 +1,44 @@
+{
+  "name": "@actiwitee/cli",
+  "version": "0.1.0",
+  "description": "Actiwitee CLI — self-hostable coding-activity aggregator",
+  "type": "module",
+  "bin": {
+    "actiwitee": "dist/cli.js"
+  },
+  "main": "dist/cli.js",
+  "scripts": {
+    "dev": "tsx src/cli.ts",
+    "build": "tsc",
+    "start": "node dist/cli.js",
+    "collect": "tsx src/cli.ts collect",
+    "serve": "tsx src/cli.ts serve",
+    "agent": "tsx src/cli.ts agent",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "contributions",
+    "heatmap",
+    "github",
+    "leetcode",
+    "codeforces",
+    "actiwitee",
+    "self-hosted"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.5",
+    "fastify": "^4.28.1",
+    "yaml": "^2.5.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
